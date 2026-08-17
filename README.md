@@ -27,6 +27,28 @@
 |:---------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------|
 | ![image](https://user-images.githubusercontent.com/69495129/136980139-7ad6adab-3f11-4711-b0a6-341080aa3361.png) | ![image](https://user-images.githubusercontent.com/69495129/136980236-c5d9ef85-f09a-47a7-b9d9-948f7b624002.png) | ![image](https://user-images.githubusercontent.com/69495129/136980681-93dcadaf-08cb-48d8-90c9-68c651a115c9.png) |
 
+## Features Added After Fork
+
+This repository continues development from
+the [original `IamJAVAman` submission](https://github.com/IamJAVAman/Invaders-SDP-Deprecated) (fork point:
+[`de9aafb`](https://github.com/IamJAVAman/Invaders-SDP-Deprecated/commit/de9aafb572c03cffa6455c965f545d72af928e8e)).
+The following features and improvements were added afterward:
+
+- **New items**
+    - `SpeedUp`: increases the player's movement speed.
+    - `AllyShip`: spawns support ships on both sides of the player for 10 seconds.
+- **Difficulty & lives**
+    - Added `setLivesByDifficulty`, adjusting the player's maximum lives based on the selected difficulty.
+- **Game modes**
+    - Added Time Attack and Survival modes (in Survival mode, the player starts with 1 life and cannot gain bonus
+      lives; in Time Attack mode, the player loses if the elapsed time exceeds 100 seconds).
+- **Project structure & tooling**
+    - Migrated the project to a Maven structure (`src/main/java`, `src/main/resources`, `src/test/java`, `pom.xml`).
+    - Added GitHub Actions workflows for automatic PR testing and PR code-metrics analysis.
+- **Bug fixes**
+    - Fixed resource (sound/image) loading issues, an incorrect `ItemManager` constructor parameter, and
+      the `AllyShip` spawn position.
+
 ## Development
 
 - IDE : IntelliJ IDEA
