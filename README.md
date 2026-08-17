@@ -29,8 +29,8 @@
 
 ## Features Added After Fork
 
-This repository continues development from
-the [original `IamJAVAman` submission](https://github.com/IamJAVAman/Invaders-SDP-Deprecated) (fork point:
+This repository continues development from the
+[original IamJAVAman submission](https://github.com/IamJAVAman/Invaders-SDP-Deprecated) (fork point:
 [`de9aafb`](https://github.com/IamJAVAman/Invaders-SDP-Deprecated/commit/de9aafb572c03cffa6455c965f545d72af928e8e)).
 The following features and improvements were added afterward:
 
