@@ -41,6 +41,10 @@ public class Wallet {
         this.coin_lv = coin_lv;
     }
 
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
     public int getCoin()
     {
         return coin;
@@ -124,7 +128,7 @@ public class Wallet {
 
     //현재 지갑상태를 파일에 저장. 저장방식: coin, bullet_lv, shot_lv, lives_lv, coin_lv 순으로 한줄씩 저장
     //Save the current wallet state to a file. Save format: coin, bullet_lv, shot_lv, lives_lv, coin_lv, each in one line
-    private void writeWallet()
+    public void writeWallet()
     {
         try {
             Core.getFileManager().saveWallet(this);

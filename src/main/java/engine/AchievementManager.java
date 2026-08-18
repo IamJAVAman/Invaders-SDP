@@ -47,6 +47,10 @@ public class AchievementManager {
         return coinReward;
     }
 
+    public Achievement getAchievement() {
+        return achievement;
+    }
+
     public void updateTotalPlayTime(int playTime) {
         if (achievement.getTotalPlayTime() < 600 && achievement.getTotalPlayTime() + playTime >= 600) {
             coinReward += PLAY_TIME_COIN;

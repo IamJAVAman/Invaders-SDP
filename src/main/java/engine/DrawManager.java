@@ -1967,4 +1967,11 @@ public final class DrawManager {
 
 		}
 	}
+
+	public void drawSignup(final Screen screen) {
+		String titleString = "Please    SignUp    And    SignIn";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 2);
+	}
 }

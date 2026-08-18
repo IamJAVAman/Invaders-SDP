@@ -7,6 +7,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import entity.Achievement;
 import entity.Ship;
 import entity.Wallet;
 import screen.*;
@@ -49,6 +50,13 @@ public final class Core {
 	private static long startTime, endTime;
 
 	private static int DifficultySetting;// <- setting EASY(0), NORMAL(1), HARD(2);
+	/** Initialize HTTP ServerSocket */
+	private static ServerSocket serverSocket;
+
+	private static AchievementManager achievementManager;
+
+	private static Wallet wallet;
+
 	private static int GameModeSetting;// <- setting Normal(0), Time Attack(1), Survival(2);
 
 	/**
@@ -71,9 +79,24 @@ public final class Core {
 			LOGGER.addHandler(consoleHandler);
 			LOGGER.setLevel(Level.ALL);
 
+			achievementManager = new AchievementManager();
+			serverSocket = new ServerSocket();
 		} catch (Exception e) {
 			// TODO handle exception
 			e.printStackTrace();
+		}
+
+		while(true) {
+			String yesOrNo = serverSocket.askSignupOrLogin();
+			if (yesOrNo.equals("YES")){
+				if (serverSocket.requestLogin() == 200) {
+					break;
+				}
+			} else if (yesOrNo.equals("NO")) {
+				serverSocket.requestSignup();
+			} else {
+				System.out.println("You enter wrong command!");
+			}
 		}
 
 		frame = new Frame(WIDTH, HEIGHT);
@@ -83,9 +106,7 @@ public final class Core {
 
 		GameState gameState;
 
-		AchievementManager achievementManager;
-		Wallet wallet = Wallet.getWallet();
-
+		wallet = Wallet.getWallet();
 		int returnCode = 1;
 		do {
 			if(GameModeSetting == 2) { // Survival mode
@@ -152,6 +173,8 @@ public final class Core {
 						+ gameState.getShipsDestroyed() + " ships destroyed.");
 				currentScreen = new ScoreScreen(GameSettingScreen.getName(0), width, height, FPS, gameState, wallet, achievementManager, false);
 
+				Achievement achievement = achievementManager.getAchievement();
+				serverSocket.sendUserState(serverSocket.nickname, gameState.getScore(), wallet.getCoin(), achievement.getTotalPlayTime(), achievement.getTotalScore(), achievement.getHighmaxCombo(), achievement.getPerfectStage(), achievement.getFlawlessFailure());
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing score screen.");
 				break;
@@ -347,5 +370,13 @@ public final class Core {
 				MAX_LIVES = 1;
 				break;
 		}
+	}
+
+	public static AchievementManager getAchievementManager() {
+		return achievementManager;
+	}
+
+	public static Wallet getWallet() {
+		return wallet;
 	}
 }
